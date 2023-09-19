@@ -260,3 +260,103 @@ public function getDescription(): string
         ]";
     }
 ```
+
+---
+
+# Etape 4: Création des Fixtures à partir de fichiers SQL existants
+
+## Générer les scripts SQL
+
+Pour générer les scripts SQL, j'ai utilisé le logiciel `DBeaver`, il permet de générer des scripts SQL à partir d'une
+base de données existante. Une fois les scripts générés, il faut les enregistrer dans le dossier `var/database/SQL` du
+projet.
+
+## Installer la librairie DoctrineFixturesBundle et Symfony/Finder
+
+Pour installer la librairie `DoctrineFixturesBundle`, il faut exécuter la commande suivante :
+
+```bash
+composer require --dev orm-fixtures
+```
+
+Pour installer la librairie `Symfony/Finder`, il faut exécuter la commande suivante :
+
+```bash
+composer require --dev symfony/finder
+```
+
+> Je choisis d'installer les libraires en mode `dev` car je n'ai pas besoin de ces librairies en production.
+
+L'installation de la librairie `DoctrineFixturesBundle` permet de créer un dossier `src/DataFixtures` dans lequel il
+se trouve un fichier `AppFixtures.php`. Ce fichier contient une classe `AppFixtures` qui permet de charger les données,
+parfait pour nous.
+
+Puisque nous avons généré des scripts SQL, il faut créer une classe qui permet de charger les données à partir des
+scripts SQL. Pour ce faire, je vais utiliser le fichier `AppFixtures.php` qui a été généré par la librairie
+
+```php
+<?php
+
+namespace App\DataFixtures;
+
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Finder\Finder;
+
+class AppFixtures extends Fixture
+{
+    public function __construct(private ParameterBagInterface $params)
+    {
+    }
+
+    public function load(ObjectManager $manager): void
+    {
+        // Obtenir le chemin vers le répertoire du projet
+        $projectDir = $this->params->get('kernel.project_dir');
+
+        // Le répertoire SQL
+        /** @phpstan-ignore-next-line */
+        $sqlDirectory = $projectDir.'/var/database/SQL';
+
+        // Utilisation de Finder pour trouver les fichiers SQL
+        $finder = new Finder();
+        $finder->in($sqlDirectory)->files()->name('*.sql');
+
+        foreach ($finder as $file) {
+            // Exécutez chaque fichier SQL
+            $sql = $file->getContents();
+
+            // Vérifiez si la requête SQL est vide
+            if (!empty($sql)) {
+                // Affichez le nom du fichier SQL (pour le débogage)
+                echo 'Exécution du fichier SQL : '.$file->getRealPath()."\n";
+
+                // Exécutez la requête SQL
+                /* @phpstan-ignore-next-line */
+                $manager->getConnection()->exec($sql);
+
+                // Enregistrez en base de données
+                $manager->flush();
+            } else {
+                echo 'Le fichier SQL est vide : '.$file->getRealPath()."\n";
+            }
+        }
+    }
+}
+```
+
+## Exécuter les fixtures
+
+Maintenant que le code est prêt, il faut exécuter les fixtures, pour ce faire, il faut exécuter la commande suivante :
+(Je passe les multiples erreurs rencontrées que j'ai résolu au fur et à mesure)
+
+```bash
+php bin/console doctrine:fixtures:load -n
+```
+
+> L'option `-n` permet de ne pas demander de confirmation avant d'exécuter les fixtures.
+
+---
+
+# Etape 5: CRUD ?
