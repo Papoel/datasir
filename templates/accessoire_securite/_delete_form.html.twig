@@ -1,0 +1,7 @@
+<form class="my-4" method="post" action="{{ path('app_accessoire_securite_delete', {'id': accessoire_securite.id}) }}"
+      onsubmit="return confirm('Voulez-vous vraiment supprimer cet accessoire de sécurité {{ accessoire_securite.rf }} ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ accessoire_securite.id) }}">
+    <button class="btn btn-danger btn-sm">
+        Effacer {{ accessoire_securite.rf }}
+    </button>
+</form>

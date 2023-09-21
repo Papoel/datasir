@@ -2,33 +2,26 @@
 
 namespace App\Controller;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Exception;
+use App\Repository\AccessoireSecuriteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    /**
-     * @throws Exception
-     */
+    public function __construct(
+        private readonly AccessoireSecuriteRepository $accessoireSecuriteRepository
+    ) {
+    }
+
     #[Route('/', name: 'app_home')]
-    public function index(Connection $connection): Response
+    public function index(Request $request): Response
     {
-        // Extraire les données de la base de données var/database/sir.db3
-        $sql = 'SELECT * FROM esp';
-        $stmt = $connection->executeQuery($sql);
-
-        // Récupérer les données dans un tableau associatif
-        $dataEsp = $stmt->fetchAllAssociative();
-
-        // Max 50 résultats
-        $sirs = array_slice(array: $dataEsp, offset: 0, length: 50);
-
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-            'dataEsp' => $dataEsp,
+        return $this->render(view: 'home/index.html.twig', parameters: [
+            'accessoireSecurite' => $this->accessoireSecuriteRepository->findAccessoiresSecuritePaginated(
+                page: $request->query->getInt(key: 'page', default: 1)
+            ),
         ]);
     }
 }
