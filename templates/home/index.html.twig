@@ -3,119 +3,89 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-    <div class="container py-4">
-        <div class="row">
-            {% for data in dataEsp %}
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ data.RF }}</h5>
-                            <p class="card-text">
-                                {{ data.DESIGNATION }}
-                            </p>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#sirDetails{{ data.ID }}">
-                                Voir les détails
-                            </button>
+    <h1>Hello HomeController!</h1>
+
+    <h2>Liste des accessoire_securites de sécurité</h2>
+
+    <div class="container my-5">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for accessoire_securite in accessoireSecurite %}
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title">{{ accessoire_securite.rf }}</h5>
+                                <span class="badge bg-secondary rounded-pill p-2">{{ accessoire_securite.id }}</span>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Modal -->
-                <div id="sirDetails{{ data.ID }}"
-                     class="modal fade"
-                     data-bs-backdrop="static"
-                     data-bs-keyboard="false"
-                     tabindex="-1"
-                     aria-labelledby="sirDetails{{ data.ID }}
-                     Label" aria-hidden="true">
-
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ data.RF }}</h1>
-                                <button type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close">
-                                </button>
+                        <div class="card-body">
+                            <div class="card-text">
+                                <ul>
+                                    {% if accessoire_securite.typeAccSecu is not same as '- -' and  accessoire_securite.typeAccSecu is not null %}
+                                        <li>Type: {{ accessoire_securite.typeAccSecu }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.typeAccSecu is not same as '- -' and  accessoire_securite.typeAccSecu is not null %}
+                                        <li>Catégorie: {{ accessoire_securite.categorieRisque }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.pressionTarage is not same as '- -' and  accessoire_securite.pressionTarage is not null %}
+                                        <li>Pression Tarage: {{ accessoire_securite.pressionTarage }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.caracteristique is not same as '- -' and  accessoire_securite.caracteristique is not null %}
+                                        <li>Caractéristique: {{ accessoire_securite.caracteristique }}</li>
+                                    {% endif %}
+                                    <li>Fluide: {{ accessoire_securite.fluideControle }}</li>
+                                    {% if accessoire_securite.fabricant is not same as '- -' and  accessoire_securite.fabricant is not null %}
+                                        <li>Fabricant: {{ accessoire_securite.fabricant }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.typeNrFabrication is not same as '- -' and  accessoire_securite.typeNrFabrication is not null %}
+                                        <li>Type NR Fabrication: {{ accessoire_securite.typeNrFabrication }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.typeNrFabrication is not same as '- -' and  accessoire_securite.typeNrFabrication is not null %}
+                                        <li>Bilan tarage (RP): {{ accessoire_securite.blnTarageRp }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.decretConstruction is not same as '- -' and  accessoire_securite.decretConstruction is not null %}
+                                        <li>Décret de construction: {{ accessoire_securite.decretConstruction }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.blnVerificationConcomitanteRp is not same as '- -' and accessoire_securite.blnVerificationConcomitanteRp is not null %}
+                                        <li>Bilan de vérification (Concomitance RP): {{ accessoire_securite.blnVerificationConcomitanteRp }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.periodiciteManoeuvrabilite is not same as '- -' and  accessoire_securite.periodiciteManoeuvrabilite is not null %}
+                                        <li>Périodicité de manœuvrabilité: {{ accessoire_securite.periodiciteManoeuvrabilite }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.dateDerniereManoeuvrabilite is not same as '- -' and  accessoire_securite.dateDerniereManoeuvrabilite is not null %}
+                                        <li>Dernière manœuvrabilité: {{ accessoire_securite.dateDerniereManoeuvrabilite }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.dateProchaineManoeuvrabilite is not same as '- -' and  accessoire_securite.dateProchaineManoeuvrabilite is not null %}
+                                        <li>Prochaine manœuvrabilité: {{ accessoire_securite.dateProchaineManoeuvrabilite }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.periodiciteTarageReglage is not same as '- -' and  accessoire_securite.periodiciteTarageReglage is not null %}
+                                        <li>Périodicité réglage tarage: {{ accessoire_securite.periodiciteTarageReglage }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.dateDerniereTarageReglage is not same as '- -' and  accessoire_securite.dateDerniereTarageReglage is not null %}
+                                        <li>Dernier tarage: {{ accessoire_securite.dateDerniereTarageReglage }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.dateProchaineTarageReglage is not same as '- -' and  accessoire_securite.dateProchaineTarageReglage is not null %}
+                                        <li>Prochain tarage: {{ accessoire_securite.dateProchaineTarageReglage }}</li>
+                                    {% endif %}
+                                    {% if accessoire_securite.idEspDirecteur is not same as '- -' and  accessoire_securite.idEspDirecteur is not null %}
+                                        <li>Id ESP Directeur: {{ accessoire_securite.idEspDirecteur }}</li>
+                                    {% endif %}
+                                </ul>
                             </div>
-                            <div class="modal-body">
-                                <form action="">
-                                    <fieldset>
-                                        <legend class="bg-light p-2 rounded">Informations</legend>
-
-                                        <div class="mb-3">
-                                            <label for="type_esp" class="form-label">Type ESP</label>
-                                            <input type="text" id="type_esp" class="form-control"
-                                                   value="{{ data.TYPE_ESP }}" disabled
-                                            >
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <div class="col-6">
-                                                <label for="localisation" class="form-label">Localisation</label>
-                                                <input type="text" id="localisation" class="form-control"
-                                                       value="{{ data.LOCALISATION }}" disabled
-                                                >
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="niveau" class="form-label">Niveau</label>
-                                                <input type="text" id="niveau" class="form-control"
-                                                       value="{{ data.NIVEAU }}" disabled
-                                                >
-                                            </div>
-                                        </div>
-
-                                        <legend class="bg-light p-2 rounded">BLN</legend>
-
-                                        <div class="mb-3 row">
-                                            <div class="col-6">
-                                                <label for="essv" class="form-label">ESSV</label>
-                                                <input type="text" id="essv" class="form-control"
-                                                       value="{{ data.BLN_ESSV }}" disabled
-                                                >
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="espn" class="form-label">ESPN</label>
-                                                <input type="text" id="espn" class="form-control"
-                                                       value="{{ data.BLN_ESPN }}" disabled
-                                                >
-                                            </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="reevalution_periodique" class="form-label">
-                                                Réévaluation périodique
-                                            </label>
-                                            <input type="text" id="reevalution_periodique" class="form-control"
-                                                   value="{{ data.BLN_REEVALUATION_PERIODIQUE }}" disabled
-                                            >
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <div class="col-6">
-                                                <label for="niveau_espn" class="form-label">
-                                                    Niveau ESPN
-                                                </label>
-                                                <input type="text" id="niveau_espn" class="form-control"
-                                                       value="{{ data.NIVEAU_ESPN }}" disabled
-                                                >
-                                            </div>
-                                            <div class="col-6">
-                                                <label for="classement_eip" class="form-label">
-                                                    Classement EIP
-                                                </label>
-                                                <input type="text" id="classement_eip" class="form-control"
-                                                       value="{{ data.CLASSEMENT_EIP }}" disabled
-                                                >
-                                            </div>
-
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <span class="text-muted">
-                                    Dernière mise à jour le {{ data.DATE_MAJ | format('LONG') }}
-                                </span>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Dernière modification: {{ accessoire_securite.dateMaj }}</small>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{{ path('app_accessoire_securite_show', {'id': accessoire_securite.id}) }}" class="btn btn-sm btn-outline-primary">Voir</a>
+                                <div class="d-flex justify-content-end align-items-center">
+                                    <a href="{{ path('app_accessoire_securite_edit', {'id': accessoire_securite.id}) }}"
+                                       class="btn btn-sm btn-outline-warning me-1">
+                                        Modifier
+                                    </a>
+                                    {{ include('accessoire_securite/_delete_form.html.twig') }}
+                                </div>
                             </div>
                         </div>
                     </div>

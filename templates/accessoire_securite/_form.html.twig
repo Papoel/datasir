@@ -1,0 +1,136 @@
+<div class="card-body">
+    {# Jumbtron expliquant ce qu'est un accessoire de sécurité #}
+    <div class="jumbotron bg-light p-4 p-md-5 text-muted rounded-2">
+        <p class="lead">Un accessoire de sécurité est un équipement qui permet de sécuriser un appareil à pression.</p>
+        <hr class="my-4">
+        <p>Il existe plusieurs types d'accessoires de sécurité, par exemple : soupape de sécurité, soupape de décharge, soupape de décharge de pression,
+            soupape de sûrété, soupape de sûreté, soupape de décharge de pression, soupape de décharge de pression, soupape de décharge de pression,
+        </p>
+    </div>
+
+    {{ form_start(form) }}
+    <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+        {# INFORMATION #}
+        <fieldset class="mb-5">
+            <legend class="h3 border-bottom border-danger pb-2">Information générale</legend>
+            <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+                <div class="col-sm-4">
+                    {{ form_label(form.rf, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.rf, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.rf) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form_label(form.typeAccSecu, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.typeAccSecu, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.typeAccSecu) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form_label(form.categorieRisque, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.categorieRisque, {'attr': {'class': 'text-muted'}}) }}
+                    {{ form_errors(form.categorieRisque) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_label(form.caracteristique, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.caracteristique, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.caracteristique) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_label(form.fluideControle, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.fluideControle, {'attr': {'class': 'text-muted'}}) }}
+                    {{ form_errors(form.fluideControle) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_label(form.idEspDirecteur, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.idEspDirecteur, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.idEspDirecteur) }}
+                </div>
+            </div>
+        </fieldset>
+
+        {# TARAGE #}
+        <fieldset class="mb-5">
+            <legend class="h3 border-bottom border-danger pb-2">Tarage</legend>
+            <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+                <div class="col-sm-6">
+                    {{ form_label(form.pressionTarage, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.pressionTarage, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.pressionTarage) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_label(form.blnTarageRp, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.blnTarageRp, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.blnTarageRp) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form_label(form.periodiciteTarageReglage, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.periodiciteTarageReglage, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.periodiciteTarageReglage) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form_label(form.dateDerniereTarageReglage, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.dateDerniereTarageReglage, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.dateDerniereTarageReglage) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form_label(form.dateProchaineTarageReglage, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.dateProchaineTarageReglage, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.dateProchaineTarageReglage) }}
+                </div>
+            </div>
+        </fieldset>
+
+        {# MANOEUVRABILITE #}
+        <fieldset class="mb-5">
+            <legend class="h3 border-bottom border-danger pb-2">Manoeuvrabilité</legend>
+            <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+                <div class="col-sm-4">
+                    {{ form_label(form.periodiciteManoeuvrabilite, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.periodiciteManoeuvrabilite, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.periodiciteManoeuvrabilite) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form_label(form.dateDerniereManoeuvrabilite, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.dateDerniereManoeuvrabilite, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.dateDerniereManoeuvrabilite) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ form_label(form.dateProchaineManoeuvrabilite, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.dateProchaineManoeuvrabilite, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.dateProchaineManoeuvrabilite) }}
+                </div>
+            </div>
+        </fieldset>
+
+        {# FABRICANT #}
+        <fieldset class="mb-5">
+            <legend class="h3 border-bottom border-danger pb-2">Fabricant / Fabrication</legend>
+            <div class="row g-3 g-sm-4 mt-0 mt-lg-2">
+                <div class="col-sm-6">
+                    {{ form_label(form.fabricant, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.fabricant, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.fabricant) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_label(form.typeNrFabrication, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.typeNrFabrication, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.typeNrFabrication) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_label(form.decretConstruction, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.decretConstruction, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.decretConstruction) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_label(form.blnVerificationConcomitanteRp, null, {'label_attr': {'class': 'custom-form-label d-block w-100'}}) }}
+                    {{ form_widget(form.blnVerificationConcomitanteRp, {'attr': {'class': 'text-capitalize'}}) }}
+                    {{ form_errors(form.blnVerificationConcomitanteRp) }}
+                </div>
+
+                <div class="col-12 d-flex justify-content-end pt-3">
+                    <a href="{{ path('app_accessoire_securite_index') }}" class="btn btn-secondary" type="button">Annuler</a>
+                    <button class="btn btn-primary ms-3" type="submit">Sauvegarder</button>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+{{ form_end(form) }}

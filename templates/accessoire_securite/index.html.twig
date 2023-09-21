@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accessoire de Securite index{% endblock %}
+
+{% block body %}
+    <main class="mx-3 my-5">
+        <h1>Liste des Accessoire de Sécurité</h1>
+        <a class="btn btn-outline-primary my-3" href="{{ path('app_accessoire_securite_new') }}">
+            Créer un nouvel accessoire de sécurité
+        </a>
+
+
+        <table class="table text-center table-hover">
+            <thead>
+                <tr>
+                    <th>actions</th>
+                    <th>RF</th>
+                    <th>Type</th>
+                    <th>Categorie</th>
+                    <th>Pression Tarage</th>
+                    <th>Caractéristique</th>
+                    <th>Fluide</th>
+                    <th>Fabricant</th>
+                    <th>Type Fabrication</th>
+                    <th>Tarage Rp</th>
+                    <th>Décret de Construction</th>
+                    <th>Concomitante Rp</th>
+                    <th>Manoeuvrabilité</th>
+                    <th>Dernière Manoeuvrabilité</th>
+                    <th>Prochaine Manoeuvrabilité</th>
+                    <th>Périodicité Tarage</th>
+                    <th>Dernier Tarage</th>
+                    <th>rochain Tarage</th>
+                    <th>Id Esp Directeur</th>
+                    <th>Date Maj</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for accessoire in accessoire_securites %}
+                <tr>
+                    <td>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{{ path('app_accessoire_securite_show', {'id': accessoire.id}) }}"
+                                   class="btn btn-sm btn-outline-primary">
+                                    voir
+                                </a>
+                                <a href="{{ path('app_accessoire_securite_edit', {'id': accessoire.id}) }}"
+                                   class="btn btn-sm btn-outline-warning">
+                                    modifier
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{ accessoire.rf }}</td>
+                    <td>{{ accessoire.typeAccSecu }}</td>
+                    <td>{{ accessoire.categorieRisque }}</td>
+                    <td>{{ accessoire.pressionTarage }}</td>
+                    {% if accessoire.caracteristique is not same as '- -' and  accessoire.caracteristique is not null %}
+                        <td>{{ accessoire.caracteristique }}</td>
+                    {% else %}
+                        <td class="text-danger">SO</td>
+                    {% endif %}
+                    <td>{{ accessoire.fluideControle }}</td>
+                    <td>{{ accessoire.fabricant }}</td>
+                    <td>{{ accessoire.typeNrFabrication }}</td>
+                    <td>{{ accessoire.blnTarageRp }}</td>
+                    <td>{{ accessoire.decretConstruction }}</td>
+                    <td>{{ accessoire.blnVerificationConcomitanteRp }}</td>
+                    <td>{{ accessoire.periodiciteManoeuvrabilite }}</td>
+                    <td>{{ accessoire.dateDerniereManoeuvrabilite }}</td>
+                    <td>{{ accessoire.dateProchaineManoeuvrabilite }}</td>
+                    <td>{{ accessoire.periodiciteTarageReglage }}</td>
+                    <td>{{ accessoire.dateDerniereTarageReglage }}</td>
+                    <td>{{ accessoire.dateProchaineTarageReglage }}</td>
+                    <td>{{ accessoire.idEspDirecteur }}</td>
+                    <td>{{ accessoire.dateMaj }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="21">Aucun accessoire de sécurité trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </main>
+{% endblock %}
